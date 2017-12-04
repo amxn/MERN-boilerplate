@@ -1,7 +1,17 @@
 const Restaurant = require('../../models/Restaurant');
 
 module.exports = (app) => {
-  app.get('/api/restaurants/:name', function (req, res, next) {
+  app.get('/api/restaurants/all', function(req, res, next) {
+    Restaurant.find({}, function(err, restaurants){
+      if (err) {
+        next(err);
+      } else {
+        res.json(restaurants);
+      }
+    });
+  });
+
+  app.get('/api/restaurants/search/:name', function (req, res, next) {
     //query = '.*' + req.params.name + '.*';
     query = req.params.name.toLowerCase();
     console.log('Searching with query ' + query);
