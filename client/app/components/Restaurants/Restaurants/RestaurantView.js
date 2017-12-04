@@ -13,6 +13,9 @@ export default class RestaurantView extends Component {
       return (
         <div>
           <p>{this.props.restaurant.restaurant.name}</p>
+          <p>{this.props.restaurant.restaurant.location.address}</p>
+          <p>{this.props.restaurant.restaurant.cuisines}</p>
+          <p><img src={this.props.restaurant.restaurant.featured_image}/></p>
         </div>
       )
     }

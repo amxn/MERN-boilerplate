@@ -48,19 +48,20 @@ class Home extends Component {
     // console.log('Current restaurants:')
     // console.log(this.state.searchResults);
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Search for restaurants:
-            <input type="text" value={this.state.searchQuery} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        {this.state.searchResults.map(result => {
-          console.log('Search result:');
-          console.log(result);
-          return (<RestaurantView key={result.restaurant.name} restaurant={result} />);
-        })}
+      <div className="container">
+        <h1>RestaurantFinder</h1>
+          <form className="input-group" onSubmit={this.handleSubmit}>
+            <label>
+              Search for restaurants:
+              <input type="text" value={this.state.searchQuery} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Search" className="btn btn-lg btn-primary" />
+          </form>
+          {this.state.searchResults.map(result => {
+            console.log('Search result:');
+            console.log(result);
+            return (<RestaurantView key={result.restaurant.name} restaurant={result} />);
+          })}
       </div>
     );
   }
