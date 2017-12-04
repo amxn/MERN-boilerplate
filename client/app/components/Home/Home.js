@@ -1,105 +1,83 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 
+class RestaurantView extends Component {
+  constructor(props) {
+    super(props);
+    console.log('Constructed with restaurant:');
+    console.log(this.props.restaurant);
+  }
+
+  render() {
+    console.log('Displaying restaurant:');
+    console.log(this.props.restaurant);
+    return (
+      <div>
+        <p>{this.props.restaurant.restaurant.name}</p>
+      </div>
+    )
+  }
+}
+
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      counters: []
+      searchQuery: '',
+      searchResults: []
     };
 
-    this.newCounter = this.newCounter.bind(this);
-    this.incrementCounter = this.incrementCounter.bind(this);
-    this.decrementCounter = this.decrementCounter.bind(this);
-    this.deleteCounter = this.deleteCounter.bind(this);
-
-    this._modifyCounter = this._modifyCounter.bind(this);
+    this.search = this.search.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    fetch('/api/counters')
+  }
+
+  search(query) {
+    console.log('Searching for ' + query);
+    fetch('/api/restaurants/search/' + query, { method: 'GET' })
       .then(res => res.json())
-      .then(json => {
+      .then(results => {
+        console.log('Got results:');
+        console.log(results);
         this.setState({
-          counters: json
+          searchResults: results
         });
+      })
+      .catch(error => {
+        console.log(error);
       });
   }
 
-  newCounter() {
-    fetch('/api/counters', { method: 'POST' })
-      .then(res => res.json())
-      .then(json => {
-        let data = this.state.counters;
-        data.push(json);
-
-        this.setState({
-          counters: data
-        });
-      });
+  handleChange(event) {
+    this.setState({searchQuery: event.target.value});
   }
 
-  incrementCounter(index) {
-    const id = this.state.counters[index]._id;
-
-    fetch(`/api/counters/${id}/increment`, { method: 'PUT' })
-      .then(res => res.json())
-      .then(json => {
-        this._modifyCounter(index, json);
-      });
-  }
-
-  decrementCounter(index) {
-    const id = this.state.counters[index]._id;
-
-    fetch(`/api/counters/${id}/decrement`, { method: 'PUT' })
-      .then(res => res.json())
-      .then(json => {
-        this._modifyCounter(index, json);
-      });
-  }
-
-  deleteCounter(index) {
-    const id = this.state.counters[index]._id;
-
-    fetch(`/api/counters/${id}`, { method: 'DELETE' })
-      .then(_ => {
-        this._modifyCounter(index, null);
-      });
-  }
-
-  _modifyCounter(index, data) {
-    let prevData = this.state.counters;
-
-    if (data) {
-      prevData[index] = data;
-    } else {
-      prevData.splice(index, 1);
-    }
-
-    this.setState({
-      counters: prevData
-    });
+  handleSubmit(event) {
+    this.search(this.state.searchQuery);
+    event.preventDefault();
   }
 
   render() {
+    // console.log('Current restaurants:')
+    // console.log(this.state.searchResults);
     return (
       <div>
-        <p>Counters:</p>
-
-        <ul>
-          { this.state.counters.map((counter, i) => (
-            <li key={i}>
-              <span>{counter.count} </span>
-              <button onClick={() => this.incrementCounter(i)}>+</button>
-              <button onClick={() => this.decrementCounter(i)}>-</button>
-              <button onClick={() => this.deleteCounter(i)}>x</button>
-            </li>
-          )) }
-        </ul>
-
-        <button onClick={this.newCounter}>New counter</button>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Search for restaurants:
+            <input type="text" value={this.state.searchQuery} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        {this.state.searchResults.map(result => {
+          console.log('Search result:');
+          console.log(result);
+          return (<RestaurantView key={result.restaurant.name} restaurant={result} />);
+        })}
       </div>
     );
   }
