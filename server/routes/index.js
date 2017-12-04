@@ -3,7 +3,10 @@ const path = require('path');
 
 module.exports = (app) => {
   // API routes
-  fs.readdirSync(__dirname + '/api/').forEach((file) => {
-    require(`./api/${file.substr(0, file.indexOf('.'))}`)(app);
-  });
+  //fs.readdirSync(__dirname + '/api/').forEach((file) => {
+  //  require(`./api/${file.substr(0, file.indexOf('.'))}`)(app);
+  //});
+  // TODO: THIS IS BAD CODE
+  require('./api/counters')(app);
+  require('./api/restaurants')(app);
 };
