@@ -12,16 +12,9 @@ module.exports = (app) => {
   });
 
   app.get('/api/restaurants/search/:name', function (req, res, next) {
-    //query = '.*' + req.params.name + '.*';
     query = req.params.name.toLowerCase();
     console.log('Searching with query ' + query);
     Restaurant.find(
-      //{
-      //  "restaurant": {
-      //    //"name": { $regex: query, $options: 'i' }
-      //    "name": query
-      //  }
-      //},
       {},
       function (err, restaurants) {
         if (err) {
