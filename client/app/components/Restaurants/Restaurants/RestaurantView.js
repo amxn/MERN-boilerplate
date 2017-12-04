@@ -11,7 +11,7 @@ export default class RestaurantView extends Component {
       console.log('Displaying restaurant:');
       console.log(this.props.restaurant);
       return (
-        <div>
+        <div className="container">
           <p>{this.props.restaurant.restaurant.name}</p>
           <p>{this.props.restaurant.restaurant.location.address}</p>
           <p>{this.props.restaurant.restaurant.cuisines}</p>

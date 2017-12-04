@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer>
-    <hr />
-    <p>Footer</p>
-  </footer>
+  <div className="container">  <footer>
+  <hr />
+  <p>Big Data Project ISM 6930</p>
+</footer></div>
 );
 
 export default Footer;

@@ -7,7 +7,7 @@ const App = ({ children }) => (
   <div>
     <Header />
 
-    <main>
+    <main className="container">
       {children}
     </main>
 
