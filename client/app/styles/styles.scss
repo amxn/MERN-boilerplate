@@ -1,3 +1,39 @@
 @charset "UTF-8";
 
 @import 'vendor/normalize';
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  h1 {
+      font-family: 'Varela Round', sans-serif;
+  }
+  .navbar {
+      color: white;
+  }
+  .hero-area h1 {
+    color: white;
+    text-shadow: #000 1px 2px 0;
+    text-align: center;
+    font-size: 4rem;
+  }
+  .card-holder h1 {
+      text-align: center;
+      padding-bottom:20px;
+      font-weight: 700;
+  }
+  .btn {
+      cursor: pointer;
+  }
+  .hero-area {
+      background: linear-gradient(transparent, rgba(0,0,0,0.8))  no-repeat center center fixed;
+      background-image: url(http://res.cloudinary.com/dxr9jxxac/image/upload/v1512181657/alex-robert-133575_mza3xa.jpg);
+      padding-top: 200px;
+      height: 570px;
+      background-color: #333;
+      background-size: cover;
+      background-position: 50%;
+  }
+  .card-holder {
+      padding: 60px 0;
+  }
