@@ -1,23 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-
-class RestaurantView extends Component {
-  constructor(props) {
-    super(props);
-    console.log('Constructed with restaurant:');
-    console.log(this.props.restaurant);
-  }
-
-  render() {
-    console.log('Displaying restaurant:');
-    console.log(this.props.restaurant);
-    return (
-      <div>
-        <p>{this.props.restaurant.restaurant.name}</p>
-      </div>
-    )
-  }
-}
+import RestaurantView from '../Restaurants/RestaurantView';
 
 class Home extends Component {
   constructor(props) {
